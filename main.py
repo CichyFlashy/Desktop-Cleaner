@@ -20,24 +20,31 @@ selected_option = input("Wybierz opcję: ")
 print(selected_option)
 
 if selected_option == '1':
-    for filename in list_of_download_files:
-        file_path = os.path.join(downloads_path, filename)
-        if os.path.isfile(file_path) or os.path.islink(file_path):
-            os.remove(file_path)
-        elif os.path.isdir(file_path):
-            shutil.rmtree(file_path)
+    decision = input("Pliki zostaną usunięte bez możliwości ich odzyskania. Czy chcesz kontynuowac? T/N:")
+    if decision.upper() == "T":
+        for filename in list_of_download_files:
+            file_path = os.path.join(downloads_path, filename)
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.remove(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+
 
 elif selected_option == '2':
-    for filename in list_of_download_files:
-        file_path = os.path.join(downloads_path, filename)
-        send2trash(file_path)
+    decision = input("Pliki zostaną przeniesione do kosza. Czy chcesz kontynuowac? T/N:")
+    if decision.upper() =='T':
+        for filename in list_of_download_files:
+            file_path = os.path.join(downloads_path, filename)
+            send2trash(file_path)
 
 elif selected_option == '3':
     type_of_file = input("Podaj rozszerzenie pliku: ")
-    for filename in list_of_download_files:
-        if filename.endswith(type_of_file):
-            file_path = os.path.join(downloads_path, filename)
-            send2trash(file_path)
+    decision = input("Pliki zostaną przeniesione do kosza. Czy chcesz kontynuowac? T/N:")
+    if decision.upper() =='T':
+        for filename in list_of_download_files:
+            if filename.endswith(type_of_file):
+                file_path = os.path.join(downloads_path, filename)
+                send2trash(file_path)
 
 elif selected_option == '4':
     exit()
